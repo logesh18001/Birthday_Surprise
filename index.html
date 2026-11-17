@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#4c1d95">
+
+<title>
+Happy Birthday Priyadharsini 💜
+</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="bg-glow"></div>
+
+<!-- PASSWORD -->
+
+<section id="passwordScreen" class="scene active">
+
+<div class="password-wrapper">
+
+<!-- LEFT PHOTO -->
+
+<div class="left-photo">
+
+<div class="photo-polaroid">
+
+<img src="./logu❤️biba.jpeg" alt="Brother">
+
+<p>
+Happy Birthday 💜❤️
+</p>
+
+</div>
+
+</div>
+
+<!-- RIGHT PASSWORD -->
+
+<div class="password-card">
+
+<h2>
+Happy Birthday Bibashana 💗
+</h2>
+
+<p>
+Enter Password
+</p>
+
+<div class="dots">
+
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+<div class="keypad">
+
+<button onclick="press('1')">1</button>
+<button onclick="press('2')">2</button>
+<button onclick="press('3')">3</button>
+
+<button onclick="press('4')">4</button>
+<button onclick="press('5')">5</button>
+<button onclick="press('6')">6</button>
+
+<button onclick="press('7')">7</button>
+<button onclick="press('8')">8</button>
+<button onclick="press('9')">9</button>
+
+<div></div>
+<button onclick="press('0')">0</button>
+<button onclick="backspace()" style="color: #ffb3b3; font-size: 28px;">⌫</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- POPUP SCREEN -->
+
+<section id="popupScreen" class="scene">
+    <div class="popup-floating-bg">
+        <div class="popup-float-card pop-img-1"><img src="./logu❤️biba.jpeg" alt="Memory 1"></div>
+        <div class="popup-float-card pop-img-2"><img src="./logu❤️biba1.jpeg" alt="Memory 2"></div>
+        <div class="popup-float-card pop-img-3"><img src="./logu❤️biba2.png" alt="Memory 3"></div>
+        <div class="popup-float-card pop-img-4"><img src="./logu❤️biba3.jpeg" alt="Memory 4"></div>
+        <div class="popup-float-card pop-img-5"><img src="./logu❤️priya1.jpeg" alt="Memory 5"></div>
+        <div class="popup-float-card pop-img-6"><img src="./logu❤️priya2.jpeg" alt="Memory 6"></div>
+    </div>
+
+    <div class="surprise-popup glass-card" onclick="proceedFromPopup()">
+        <h2>Bibashana waiting for your surprise 💜</h2>
+        <span class="popup-hint">Tap to continue or wait for magic ✨</span>
+    </div>
+</section>
+
+<!-- DATE -->
+
+<section id="dateScreen" class="scene">
+
+<div class="date-floating-bg">
+    <!-- Top Center Crown -->
+    <div class="float-img-card pos-crown"><img src="./logu❤️biba2.png" alt="Memory"></div>
+    
+    <!-- Left Wing -->
+    <div class="float-img-card pos-left-top-in"><img src="./logu❤️biba.jpeg" alt="Memory"></div>
+    <div class="float-img-card pos-left-top-out"><img src="./logu❤️priya3.png" alt="Memory"></div>
+    <div class="float-img-card pos-left-mid"><img src="./logu❤️priya.jpeg" alt="Memory"></div>
+    <div class="float-img-card pos-left-bot-out"><img src="./logu❤️priya1.jpeg" alt="Memory"></div>
+    <div class="float-img-card pos-left-bot-in"><img src="./logu❤️priya5.jpeg" alt="Memory"></div>
+    
+    <!-- Right Wing -->
+    <div class="float-img-card pos-right-top-in"><img src="./logu❤️biba1.jpeg" alt="Memory"></div>
+    <div class="float-img-card pos-right-top-out"><img src="./logu❤️priya4.png" alt="Memory"></div>
+    <div class="float-img-card pos-right-mid"><img src="./logu❤️biba3.jpeg" alt="Memory"></div>
+    <div class="float-img-card pos-right-bot-out"><img src="./logu❤️priya2.jpeg" alt="Memory"></div>
+    <div class="float-img-card pos-right-bot-in"><img src="./logu❤️priya6.jpeg" alt="Memory"></div>
+</div>
+
+<div id="dateHearts" class="date-hearts-container"></div>
+
+<div class="date-box glass-card">
+
+<h1 class="neon-text">
+23 • 11 • 2026
+</h1>
+
+<p id="dateTypewriter"></p>
+
+</div>
+
+</section>
+
+<!-- LOADING -->
+
+<section id="loadingScreen" class="scene">
+
+<div class="loading-content">
+
+<div class="cake-loader">
+🎂
+</div>
+
+<h2>
+Preparing Memories...
+</h2>
+
+<div class="loader">
+
+<div class="loader-fill"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ENVELOPE -->
+
+<section id="envelopeScreen" class="scene">
+
+<div class="envelope-page">
+
+<h1>
+Happy Birthday My dear papa ❤️
+</h1>
+
+<div class="envelope"
+onclick="openEnvelope()">
+
+<div class="letter">
+
+<h3>
+Dear Love 💜
+</h3>
+
+<p>
+A special surprise
+is waiting for you.
+</p>
+
+</div>
+
+<div class="back"></div>
+
+<div class="flap"></div>
+
+<div class="seal">
+💛
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PHOTO SCREEN -->
+
+<section id="photoScreen" class="scene">
+
+<div class="photo-bg-fixed">
+    <img src="./logu❤️biba2.png" class="hero-photo" alt="Our Memory" decoding="async">
+    <div class="overlay"></div>
+</div>
+
+<div class="photo-scroll-container">
+    <div class="floating-text">
+
+        <h1>
+        My Future ✨🤗💜
+        </h1>
+
+        <h2>
+        My Heart Beat 💗
+        </h2>
+
+        <h3>
+        My World 🌍❤️
+        </h3>
+        <p id="dada">Happiest Birthday My Lovely papa 💜
+
+You mean the whole world to me. ❤️
+
+Honestly, en life-la nee illaama naan eppadi iruppen nu enake theriyadhu. Nee en lover mattum illa… nee en comfort place, en strength, en happiness, en peace, and enakku romba important-ah irukkura person. 🥹❤️
+
+Un kooda spend panra every moment-um enakku special. Namma siricha moments, pesina conversations, chinna chinna fights, teasing, kovam, samadhanam — ellame en heart-la forever memories-ah irukkum. ❤️‍🩹
+
+Namma evlo fight pannalum, evlo misunderstandings vandhaalum, oru vishayam mattum eppovume maaradhu — **en love for you.** ❤️‍🔥
+
+Nee illaama en life complete-ah feel aagathu. En smile-ku reason-ahum, en happiness-ku oru periya reason-ahum nee dhaan. Unna en life-la kidaichadhu enakku kidaicha biggest blessing. 🥺💜
+
+Thank you for always understanding me, supporting me, caring for me, and enna vittu pogama en pakkathula irundhadhukku. Naan sometimes sollama irundhaalum, nee enakku evlo important nu words-la explain panna mudiyadhu.
+
+Un life full-ah happiness, success, peace, good health, endless smiles, and nee deserve panra ella beautiful things-um kidaikkanum nu heart-la irundhu wish panren. ✨
+
+Un dreams ellame one by one true aaganum. Un life-la varra every beautiful moment-layum naan un pakkathula irundhu, unna support panni, unna love panni, un kooda memories create pannanum nu aasapaduren. ❤️
+
+Future-la enna nadakkum nu enaku theriyadhu… aana en future pathi yosikkumbodhu, en pakkathula nee irukkanum nu mattum dhaan en heart-ku theriyum. ❤️‍🔥
+
+Once again… Happiest Birthday, my love. 🎂❤️
+
+Nee enakku just a person illa… **nee dhaan en world.** 🥺❤️
+Unna lose panradha vida enakku bayamaana vishayam vera edhuvum illa.
+
+**Without you, something in me will always feel incomplete.**
+**Love you more than words can ever explain. ❤️‍🩹**
+
+Innaikum nee.
+Naalaikum nee.
+En future-layum nee dhaan. ❤️‍🔥
+
+**Love you forever, my love. 😘🤗❤️**
+
+        </p>
+
+        <button
+        class="next-btn"
+        onclick="showDreams()">
+
+        Our Future Dreams 🏡✨
+
+        </button>
+
+    </div>
+</div>
+
+</section>
+
+<!-- DREAMS SCREEN -->
+
+<section id="dreamsScreen" class="scene">
+
+<div class="dreams-container glass-card">
+    <div class="dreams-header">
+        <span class="dreams-badge">🏡 Our Future World</span>
+        <h1>Our Future Dreams ✨</h1>
+        <p>"En future pathi yosikkumbodhu, en pakkathula nee irukkanum nu mattum dhaan en heart-ku theriyum..."</p>
+    </div>
+
+    <div class="dreams-grid">
+        <div class="dream-card">
+            <div class="dream-icon">🚗🌙</div>
+            <h3>Late Night Long Drives</h3>
+            <p>Late night long drives with you playing our favorite songs, holding hands without talking... just you and me. ❤️</p>
+        </div>
+
+        <div class="dream-card">
+            <div class="dream-icon">🍳🥰</div>
+            <h3>Cooking & Messy Moments</h3>
+            <p>Together kitchen-la cooking panni mess panra moments... un mugathula maavu poosi sirikkura andha innocent moments. 🫶</p>
+        </div>
+
+        <div class="dream-card">
+            <div class="dream-icon">✈️🏝️</div>
+            <h3>Traveling The World</h3>
+            <p>Namma aasaipatta ovvoru edangallukkum un kayya pidichittu travel panni, puthu puthu memories create panradhu. 🌟</p>
+        </div>
+
+        <div class="dream-card">
+            <div class="dream-icon">👵👴❤️</div>
+            <h3>Growing Old Together</h3>
+            <p>Nadai thalarndhaalum, mudi veluthaalum... un viralaiye pidithukondu en kadasi moochu varai un kooda vazhavendiyadhu. 💫</p>
+        </div>
+    </div>
+
+    <button class="dreams-next-btn" onclick="showGreeting()">
+        Read My Birthday Letter 💌
+    </button>
+</div>
+
+</section>
+
+<!-- GREETING -->
+
+<section id="greetingScreen" class="scene">
+
+<div class="greeting-layout">
+
+<div class="left-message">
+
+<h1>
+Happy Birthday My Heart Beat 💜
+</h1>
+
+<p id="messageText"></p>
+
+</div>
+
+<div class="right-col" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+<div class="right-photos">
+
+<div class="photo-card p1">
+<img src="./logu❤️priya1.jpeg">
+</div>
+
+<div class="photo-card p2">
+<img src="./logu❤️priya.jpeg">
+</div>
+
+<div class="photo-card p3">
+<img src="./logu❤️priya2.jpeg">
+</div>
+
+</div>
+
+<button class="photo-btn" onclick="nextPhoto()">
+     Next Photo 📸
+</button>
+</div>
+
+</div>
+
+<button
+class="celebrate-btn"
+onclick="showPromises()">
+
+7 Promises For My Papa 💍
+
+</button>
+
+</section>
+
+<!-- 7 PROMISES SCREEN -->
+
+<section id="promiseScreen" class="scene">
+
+<div class="promise-container glass-card">
+    <div class="promise-header">
+        <span class="promise-badge">💍 En Papa-kku En 7 Sathiyangal</span>
+        <h1>7 Promises For My Papa 💜</h1>
+        <p class="promise-sub">Tap each golden card to unlock my lifetime promises to you ✨</p>
+        <div class="promise-counter" id="promiseCounter">Unlocked 0 of 7 Promises 💜</div>
+    </div>
+
+    <div class="promises-grid">
+        <div class="promise-card" id="pCard-0" onclick="unlockPromise(0)">
+            <div class="p-card-inner">
+                <div class="p-card-front">
+                    <span class="p-num">#1</span>
+                    <span class="p-icon">💍</span>
+                    <h4>Promise #1</h4>
+                    <span class="p-tap">Tap to unlock ✨</span>
+                </div>
+                <div class="p-card-back">
+                    <span class="p-tag">Promise #1 💍</span>
+                    <p>"Evlo periya sandai vandhaalum, un kaiya naan eppovume vida maatten. Fights will end, but my love for you never will. ❤️"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="promise-card" id="pCard-1" onclick="unlockPromise(1)">
+            <div class="p-card-inner">
+                <div class="p-card-front">
+                    <span class="p-num">#2</span>
+                    <span class="p-icon">🌸</span>
+                    <h4>Promise #2</h4>
+                    <span class="p-tap">Tap to unlock ✨</span>
+                </div>
+                <div class="p-card-back">
+                    <span class="p-tag">Promise #2 🌸</span>
+                    <p>"Un kovam, azhugai, silmisham — ellathayum thaangikka eppovume naan un pakkathula iruppen. 🥹"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="promise-card" id="pCard-2" onclick="unlockPromise(2)">
+            <div class="p-card-inner">
+                <div class="p-card-front">
+                    <span class="p-num">#3</span>
+                    <span class="p-icon">✨</span>
+                    <h4>Promise #3</h4>
+                    <span class="p-tap">Tap to unlock ✨</span>
+                </div>
+                <div class="p-card-back">
+                    <span class="p-tag">Promise #3 ✨</span>
+                    <p>"En vaazhkkaiyoda muthal priority eppovume un mugathula irukkura andha azhagana smile dhaan. 🫶"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="promise-card" id="pCard-3" onclick="unlockPromise(3)">
+            <div class="p-card-inner">
+                <div class="p-card-front">
+                    <span class="p-num">#4</span>
+                    <span class="p-icon">🫂</span>
+                    <h4>Promise #4</h4>
+                    <span class="p-tap">Tap to unlock ✨</span>
+                </div>
+                <div class="p-card-back">
+                    <span class="p-tag">Promise #4 🫂</span>
+                    <p>"Ulagame edhira ninnnalum, yaarum nambaadha nerathilum, un pakkathula unakku periya balamaaga naan nippen. 💜"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="promise-card" id="pCard-4" onclick="unlockPromise(4)">
+            <div class="p-card-inner">
+                <div class="p-card-front">
+                    <span class="p-num">#5</span>
+                    <span class="p-icon">🕊️</span>
+                    <h4>Promise #5</h4>
+                    <span class="p-tap">Tap to unlock ✨</span>
+                </div>
+                <div class="p-card-back">
+                    <span class="p-tag">Promise #5 🕊️</span>
+                    <p>"Un kanavugal & aasaigalai nijam aakka, un valarchikku eppovume un thunaiyaaga iruppen. 🌟"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="promise-card" id="pCard-5" onclick="unlockPromise(5)">
+            <div class="p-card-inner">
+                <div class="p-card-front">
+                    <span class="p-num">#6</span>
+                    <span class="p-icon">🏡</span>
+                    <h4>Promise #6</h4>
+                    <span class="p-tap">Tap to unlock ✨</span>
+                </div>
+                <div class="p-card-back">
+                    <span class="p-tag">Promise #6 🏡</span>
+                    <p>"Namma edhirkaalathula namma kooda irukkum ovvoru nodiyaiyum santhoshamaagavum, unakku oru safe haven-aagavum aakkuven. 💫"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="promise-card" id="pCard-6" onclick="unlockPromise(6)">
+            <div class="p-card-inner">
+                <div class="p-card-front">
+                    <span class="p-num">#7</span>
+                    <span class="p-icon">♾️</span>
+                    <h4>Promise #7</h4>
+                    <span class="p-tap">Tap to unlock ✨</span>
+                </div>
+                <div class="p-card-back">
+                    <span class="p-tag">Promise #7 ♾️</span>
+                    <p>"Innaikum, naalaikum, aayiram jenmam eduthaalum ovvoru jenmam-layum unnaiye thedi pidithu unnaiye choose pannuven, en papa. ❤️‍🔥"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sealed badge when all unlocked -->
+    <div id="promiseSeal" class="promise-seal hidden">
+        <div class="seal-badge">
+            <span class="seal-icon">🔒💜</span>
+            <h3>Locked Forever In My Heart</h3>
+            <p>En uyir ullavarai indha sathiyangal unakku mattumae, Priyadharshini ❤️</p>
+            <button class="promise-next-btn" onclick="showCountdown()">
+                Make a Wish & Cut The Cake! 🎂✨
+            </button>
+        </div>
+    </div>
+</div>
+
+</section>
+
+<!-- COUNTDOWN -->
+
+<section id="countScreen" class="scene">
+
+<div class="count-box">
+
+<h1 id="countNumber">
+3
+</h1>
+
+<p>
+Get Ready...
+</p>
+
+</div>
+
+</section>
+
+<!-- CAKE -->
+
+<section id="cakeScreen" class="scene">
+
+<div class="cake-container" onclick="handleCakeClick()" style="cursor: pointer;">
+    <div class="cake-glow"></div>
+    <div class="big-cake">
+    🎂
+    <div class="candle" id="birthdayCandle" onclick="blowCandle(event)">🕯️</div>
+    </div>
+</div>
+
+<div class="tap-instruction" id="cakeInstruction" onclick="handleCakeClick()" style="cursor: pointer;">
+    <span class="arrow-down">👇</span>
+    <h2 id="cakeInstructionText">Tap The Cake to Cut & Celebrate! 🎂🎉</h2>
+    <p class="wish-hint" id="cakeInstructionSub">Make a secret wish & tap the cake to celebrate! 💜✨</p>
+</div>
+
+<!-- Secret Love Letter Pop-up after blowing candle -->
+<div id="wishModal" class="wish-modal hidden">
+    <div class="wish-letter glass-card">
+        <span class="wish-icon">💌✨</span>
+        <h2>My Wish For You ❤️</h2>
+        <p>"Un wish enna nu enaku theriyadhu, aana un ella kanavugalayum un pakkathula irundhu nijamakkuradhu dhaan en ore aasai. Happy Birthday En Uyire ❤️"</p>
+        <button class="cut-cake-btn" onclick="readyToCutCake()">
+            Now, Let's Cut The Cake! 🎂🎉
+        </button>
+    </div>
+</div>
+
+</section>
+
+<!-- FINAL -->
+
+<section id="finalScreen" class="scene">
+
+<div class="final-photos">
+<div class="floating-img left-img">
+<img src="./logu❤️biba3.jpeg" alt="Left Photo">
+</div>
+
+<div class="floating-img right-img">
+<img src="./logu❤️priya2.jpeg" alt="Right Photo">
+</div>
+</div>
+
+<div class="final-content">
+<h1 class="final-title">
+HAPPY BIRTHDAY
+</h1>
+
+<h2>
+Priyadharshini ❤️
+</h2>
+
+<h3>
+23 • 11 • 2026
+</h3>
+
+<p>
+
+Found You By Chance, But Loving You Was Meant To Be. ❤️
+
+<br><br>
+
+Loved You With My Soul. 🫶
+
+</p>
+</div>
+
+<div id="effects"></div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
