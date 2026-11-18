@@ -1011,24 +1011,71 @@ white-space: pre-wrap;
 }
 
 .photo-btn {
-    padding: 12px 25px;
+    padding: 12px 32px;
     border: none;
     border-radius: 30px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, #c084fc, #ec4899);
     color: white;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 8px 25px rgba(236, 72, 153, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     transition: 0.3s ease;
-    align-self: center; /* keep it centered vertically */
+    touch-action: manipulation;
 }
 
 .photo-btn:hover {
-    background: rgba(255, 255, 255, 0.4);
-    transform: translateY(-3px);
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(236, 72, 153, 0.65);
+}
+
+.photo-caption-card {
+    width: 310px;
+    max-width: 90vw;
+    background: rgba(15, 10, 30, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1.5px solid rgba(192, 132, 252, 0.4);
+    border-radius: 18px;
+    padding: 14px 18px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(192, 132, 252, 0.2);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    margin-top: 5px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo-caption-card.caption-fade {
+    opacity: 0.15;
+    transform: translateY(6px);
+}
+
+.caption-counter {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fef08a;
+    letter-spacing: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.caption-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #fff;
+    font-weight: 500;
+    font-style: italic;
+    margin: 0;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
 .celebrate-btn{
@@ -2015,6 +2062,17 @@ html, body {
 .right-photos {
     width: min(270px, 80vw);
     height: calc(min(270px, 80vw) * 1.25);
+}
+
+.photo-caption-card {
+    width: min(290px, 86vw);
+    padding: 12px 14px;
+    min-height: 75px;
+}
+
+.caption-text {
+    font-size: 13px;
+    line-height: 1.5;
 }
 
 .celebrate-btn {

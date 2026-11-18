@@ -166,11 +166,24 @@ function showDreams(){
 }
 
 function showGreeting(){
-
     showScene("greetingScreen");
-
     startTyping();
 
+    // Reset photo index and caption
+    currentPhotoIndex = 0;
+    const photoCards = document.querySelectorAll(".photo-card");
+    photoCards.forEach((c, idx) => {
+        if(idx === 0) c.classList.add("active");
+        else c.classList.remove("active");
+    });
+    const captionEl = document.getElementById("captionText");
+    const counterEl = document.getElementById("captionCounter");
+    if(captionEl && photoCaptions[0]) {
+        captionEl.innerText = photoCaptions[0];
+    }
+    if(counterEl) {
+        counterEl.innerText = `1 / ${photoCards.length} 💜`;
+    }
 }
 
 /* =========================
@@ -220,15 +233,25 @@ const birthdayMessage = `
 
 Happy Birthday, my beautiful Priyadharshini ❤️🎂✨
 
-Nee en life-la vandhadhu enakku kidaicha romba azhagana gift. 🥹❤️
-Un smile en happiness, un voice en peace, un presence enakku oru home maari. 🫶
-Un kooda irukkura every small moment-um enakku romba special. 💕
-Un dreams-ku support-ah, un happiness-ku reason-ah eppovume irukkanum nu aasapaduren. ❤️‍🩹
-Namma future-la enna nadakkum nu theriyadhu, aana en heart-ku enna venum nu enaku clear-ah theriyum — adhu nee dhaan. ❤️‍🔥
-Innaikum nee, naalaikum nee, en life full-ahum nee dhaan. ❤️
-Aayiram life kidaichaalum, ovvoru life-layum unnai thedi, unnaiye choose pannuven. ❤️‍🔥
-Un beautiful smile eppovume fade aaga koodadhu. 🥰
-En muzhu heart-oda, ovvoru naalum unnaiye choose pannitu iruppen. Happy Birthday, my love. ❤️‍🩹✨
+Nee en life-la vandhadhukku apram, enakku happiness-na enna, oruthanga namakku evlo special-ah irukka mudiyum-ngradha un moolama dhaan purinjukitten. 🥹❤️
+
+Un kooda pesura ovvoru moment-um, nee sirikkira andha chinna chinna moments-um en manasukku romba precious. Sila neram enna sollanum-nu kooda theriyadhu, aana un kooda irundha mattum podhum, manasu romba happy-ah irukkum. 🫶
+
+Unakku kashtam varumbodhu unakku aarudhala irukkanum, nee santhoshama irukkumbodhu un kooda serndhu santhoshapadanum. Un dreams ellathukkum support-ah, un life-la eppovume unnai purinjukura oruthana irukkanum-nu aasapaduren. ❤️
+
+Namma life eppadi maarinaalum, situations eppadi irundhaalum, unna vittu pogama, un kaiya pidichittu ellaathaiyum serndhu face pannanum-ngradhu dhaan en aasai. 
+
+Enakku perfect life venam, aana andha life-la nee irukkanum. Periya periya happiness venam, un kooda irukkura chinna chinna moments podhum. 🥹💗
+
+Aayiram per namma life-la vandhaalum, en manasu thedura oru person nee mattum dhaan. Innaikum unna dhaan choose panren, naalaikum unna dhaan choose pannuven. Ovvoru naalum pudhusa unnai love panna aasapaduren. ❤️‍🔥
+
+Un smile eppovume ippadiye irukkanum. Unakku nee ninaikkira ella happiness-um kidaikkanum. Un life-la nee aasapadra ella dreams-um nijamaaganum.
+
+**Happy Birthday, my love!** 🥰❤️
+
+Unakku naan evlo love panren-ngradha vaarthaigalaala full-ah solla mudiyadhu. Aana onnu mattum unakku promise panren — en manasukku nee evlo special-o, adhe alavukku ovvoru naalum unnai special-ah feel panna vaippen. 
+
+**You are not just a part of my life; you are one of the most beautiful reasons behind my happiness. I love you endlessly.** ❤️‍🩹✨
 
 
 `;
@@ -266,25 +289,46 @@ function startTyping(){
         }
     }, 35);
 }
-let current = 0;
+const photoCaptions = [
+    "Un kai viralai korthu naan pidicha andha nodi, en kadasi jenmam varai un thunaiyaaga irukka en uyir sathiyam panniduchu. 🤝❤️",
+    "Un kankalukulla irukkura andha aazhathai paarkkumbodhu, en aathmaave unkitta mothama flat aagi karainju pogudhu. 🥺👀✨",
+    "Mugathoda azhaga vida, un aathmaavoda thooimaiyaana nalla character dhaan enna un kaaladila vizha vechuruchu. 🤍🌸",
+    "En vaazhkkaiyoda இருண்ட nodigalai kooda velichamaakkura ore athisayam, un idhazhgal sindhura andha unmaiyaana siripu dhaan. 🥰✨",
+    "En pakkathula nee nikkumbodhu dhaan, indha boomiyila naan pirandhadhukku oru muzhumaiyaana artham kidaikkudhu. 🫂❤️‍🔥",
+    "Enakkaga nee thudikkira andha selfless-ana anbil, en thaaiyoda maru-uruvathaiye naan unkitta dhaan paarkkuren. 🥹💜",
+    "Aayiram kavithaigal solladha kaadhalin aazhathai, un mounamaana kangal en idhayathukku sollikitte irukku. 💫👀",
+    "Indha ulagathil naan paatha ella azhagayum thooki saapdra ore athisayam, en manasa aala vandha un thooimaiyaana thotram dhaan. 👑❤️",
+    "Namma evlo periya sandai pottalum, unna lose panna koodadhu nu thudikkira andha bayathula dhaan en aazhamaana kaadhal irukku. ❤️‍🩹🥺",
+    "En vaazhkkaiku kidaicha migapperiyara aaseervaadham, yaaraiyum kaayapaduthadha un punidhamaana nalla manasu dhaan. 🛡️🤍",
+    "Moochu ninnu poyee indha udambu azhinjaalum, aayiram jenmam eduthaalum en idhayam unnai mattumae thedi vandhu thudikkum. ♾️❤️‍🔥"
+];
 
-const photos =
-document.querySelectorAll(".photo-card");
+let currentPhotoIndex = 0;
 
 function nextPhoto(){
+    const photoCards = document.querySelectorAll(".photo-card");
+    if(!photoCards.length) return;
 
-    photos[current]
-    .classList.remove("active");
+    photoCards[currentPhotoIndex].classList.remove("active");
+    currentPhotoIndex = (currentPhotoIndex + 1) % photoCards.length;
+    photoCards[currentPhotoIndex].classList.add("active");
 
-    current++;
+    const captionEl = document.getElementById("captionText");
+    const counterEl = document.getElementById("captionCounter");
+    const captionCard = document.getElementById("photoCaption");
 
-    if(current >= photos.length){
-        current = 0;
+    if(captionCard){
+        captionCard.classList.add("caption-fade");
+        setTimeout(()=>{
+            if(captionEl && photoCaptions[currentPhotoIndex]) {
+                captionEl.innerText = photoCaptions[currentPhotoIndex];
+            }
+            if(counterEl) {
+                counterEl.innerText = `${currentPhotoIndex + 1} / ${photoCards.length} 💜`;
+            }
+            captionCard.classList.remove("caption-fade");
+        }, 180);
     }
-
-    photos[current]
-    .classList.add("active");
-
 }
 /* =========================
    COUNTDOWN
