@@ -793,6 +793,71 @@ transform:rotateX(180deg);
 bottom:120px;
 }
 
+/* ENVELOPE HINT */
+.envelope-hint {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 32px auto 0;
+    padding: 11px 24px;
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1.5px solid rgba(255, 215, 0, 0.5);
+    border-radius: 30px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28), 0 0 16px rgba(255, 215, 0, 0.25);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: envelopeHintPulse 2s infinite ease-in-out;
+}
+
+.envelope-hint:hover {
+    background: rgba(255, 255, 255, 0.28);
+    border-color: rgba(255, 215, 0, 0.85);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.38), 0 0 24px rgba(255, 215, 0, 0.5);
+    transform: translateY(-2px) scale(1.04);
+}
+
+.envelope-hint .hint-hand {
+    font-size: 19px;
+    display: inline-block;
+    animation: hintHandBounce 1.2s infinite ease-in-out;
+}
+
+.envelope-hint.fade-out {
+    opacity: 0;
+    transform: translateY(15px) scale(0.9);
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+@keyframes envelopeHintPulse {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.26), 0 0 14px rgba(255, 215, 0, 0.2);
+    }
+    50% {
+        transform: translateY(-5px) scale(1.03);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32), 0 0 24px rgba(255, 215, 0, 0.45);
+    }
+}
+
+@keyframes hintHandBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
 /* PHOTO SCREEN */
 
 #photoScreen {
@@ -1949,6 +2014,17 @@ html, body {
 
 .envelope.open .letter {
     bottom: 85px;
+}
+
+.envelope-hint {
+    margin: 20px auto 0;
+    padding: 9px 18px;
+    font-size: 13.5px;
+    gap: 8px;
+}
+
+.envelope-hint .hint-hand {
+    font-size: 17px;
 }
 
 /* PHOTO SCREEN */

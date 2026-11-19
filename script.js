@@ -144,17 +144,19 @@ function showScene(id){
 ========================= */
 
 function openEnvelope(){
+    const env = document.querySelector(".envelope");
+    if(!env || env.classList.contains("open")) return;
 
-    document
-    .querySelector(".envelope")
-    .classList.add("open");
+    env.classList.add("open");
+
+    const hint = document.getElementById("envelopeHint");
+    if(hint){
+        hint.classList.add("fade-out");
+    }
 
     setTimeout(()=>{
-
         showScene("photoScreen");
-
-    },3000);
-
+    }, 3000);
 }
 
 /* =========================
