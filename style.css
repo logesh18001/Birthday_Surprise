@@ -1780,6 +1780,50 @@ transform:scale(1.2);
     line-height: 1.6;
 }
 
+.final-card {
+    position: relative;
+    z-index: 2;
+    background: rgba(15, 8, 30, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1.5px solid rgba(192, 132, 252, 0.4);
+    border-radius: 22px;
+    padding: 24px 30px;
+    margin: 25px auto 0;
+    max-width: 680px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45), 0 0 25px rgba(192, 132, 252, 0.2);
+    text-align: center;
+}
+
+.final-hug-message {
+    font-size: clamp(16px, 2.1vw, 21px) !important;
+    font-style: italic;
+    color: #fef08a !important;
+    line-height: 1.7 !important;
+    margin: 0 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    font-weight: 500;
+}
+
+.final-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0;
+    color: rgba(216, 180, 254, 0.65);
+    font-size: 15px;
+    letter-spacing: 5px;
+}
+
+.final-soul-quote {
+    font-size: clamp(14.5px, 1.8vw, 18px) !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+    line-height: 1.6 !important;
+    opacity: 0.95;
+    font-weight: 500;
+}
+
 @keyframes glow{
 
 from{
@@ -2325,6 +2369,28 @@ html, body {
     margin-top: 12px !important;
     line-height: 1.55 !important;
     padding: 0 8px !important;
+}
+
+.final-card {
+    padding: 16px 14px;
+    margin: 14px auto 0;
+    width: min(94%, 520px);
+    border-radius: 18px;
+}
+
+.final-hug-message {
+    font-size: clamp(13.5px, 3.8vw, 16px) !important;
+    line-height: 1.55 !important;
+}
+
+.final-divider {
+    margin: 12px 0;
+    font-size: 12px;
+}
+
+.final-soul-quote {
+    font-size: clamp(12.5px, 3.4vw, 15px) !important;
+    line-height: 1.5 !important;
 }
 
 }
