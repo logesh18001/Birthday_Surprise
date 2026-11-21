@@ -32,6 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Auto-init story if photoScreen is active (e.g. testing or refresh)
+    const photoScreen = document.getElementById("photoScreen");
+    if(photoScreen && photoScreen.classList.contains("active")) {
+        startStoryReader();
+    }
 });
 
 let popupTimer = null;
@@ -136,6 +142,9 @@ function showScene(id){
         if(scrollContainer) {
             scrollContainer.scrollTop = 0;
         }
+        if(id === "photoScreen") {
+            startStoryReader();
+        }
     }
 }
 
@@ -157,6 +166,352 @@ function openEnvelope(){
     setTimeout(()=>{
         showScene("photoScreen");
     }, 3000);
+}
+
+/* =========================
+   INTERACTIVE STORY LETTER
+========================= */
+
+const storyChapters = [
+    {
+        title: "🎂 Happy Birthday My Biba!",
+        timer: 10,
+        content: `
+            <div class="story-highlight">🎂❤️ <strong>HAPPY BIRTHDAY, MY DEAR BIBASHANA!</strong> ❤️🫂😘</div>
+            <div class="story-subhighlight"><strong>My Dearest Love, My Biba! ❤️🥹</strong></div>
+            <p>Unna ya enakku pudichirukku, edhukku pudichirukku-nu yaaravadhu enkitta ketta, adhukku en kitta sariyana badhil illa. Aana onnu mattum enakku theriyum.</p>
+            <p>Unna enakku evlo pudikkumo, andha alavukku vera yaaraiyum en life-la pudichadhilla. En ex-ah love pannadhai vida unna romba adhigama love panren. Idha naan avaloda compare panni sollala. Nee avala maadhiri illa, <strong>nee nee-ah irukkuradhunaala dhaan enakku unna ivlo pudikkudhu. ❤️</strong></p>
+        `
+    },
+    {
+        title: "💖 Reason Illadha Unmaiyana Love",
+        timer: 9,
+        content: `
+            <p>Unna thavira vera edhaiyum yosikka kooda enakku thonala. Enakku nee pudikkum. Adhukku oru specific reason irundha mattum dhaan adhu love-ah?</p>
+            <p>Enna reason-nu theriyama, oruthanga mela ivlo love varradhu dhaan unmaiyana love-nu naan ninaikkiren. Idha naan en love-ah prove panradhukkaga sollala. En manasula irukkuradha un kitta sollanum-nu thonuchu. Adhaan solren.</p>
+            <p class="story-accent">Aana nee en life-la irukkanum. Endha situation vandhaalum un kooda naan iruppen. <strong>Endha kaaranathukkaagavum unna vittuttu poga maatten. ❤️</strong></p>
+        `
+    },
+    {
+        title: "💬 En Manasu Kekkura Orey Vishayam",
+        timer: 11,
+        content: `
+            <p>Nee enna sonnalum naan kekka ready-ah irukken. Idhuvarikkum naan appadithaan irundhirukken. Naan mattum dhaan message panren, naan mattum dhaan pesuradhukku try panren-nu unakku thonalaam. Aana nee enkitta pesaama irukkumbodhu enakku oru maadhiri feel aagudhu. Adhaan naan message pannitte irukken.</p>
+            <p>Naan un kitta ennoda mattum pesittu iru, full time enakkaga spend pannu-nu kekkala. <strong>Nee enna panra, enga irukka, saaptiya, innikku un day eppadi pochu, unga veetla nilamai eppadi irukku, anga enna situation-nu chinna chinna vishayangalai kooda en kitta share pannanum-nu dhaan aasapaduren.</strong></p>
+            <p>Enakku un kitta irundhu perusa edhuvum expectation illa. Mudinja oru naalaikku moonu thadava message, oru chinna call illa oru voice message. Avlodhaan. Unakku time irukkumbodhu pesu. Un situation-ah naan understand pannikrean. Unna endha vidhathulayum force panna virumbala.</p>
+        `
+    },
+    {
+        title: "✨ 07/05/2026 - First Time Unna Paartha Naal",
+        timer: 12,
+        content: `
+            <p>Unakku theriyuma, naan yaar kittayum ivlo emotionally attach aanadhu illa. Aana un kitta mattum appadi irukken. Yen appadinu ketta, enakku therinja ore badhil: <strong>I LOVE YOU SO MUCH!</strong></p>
+            <div class="story-special-date"><strong>Unna first time paartha andha naal enakku innum nyabagam irukku: 07/05/2026 🗓️✨</strong><br><small style="color:#fde047;">Exact time theriyala, almost 9:30 irukkumnu ninaikkiren. Andha naal-la irundhu dhaan en manasula oru beautiful feeling start aachu.</small></div>
+            <p>Internship class-la nee oru pakkam irukkumbodhu, unna theriyama paarkkura maadhiri paathu rasippen. Nee enna paarkkumbodhu naan paarkkaadha maadhiri nadippen. 😂 Aana en manasukkulla unkitta pesanum-nu avlo aasai irukkum.</p>
+            <p>Nee edhaavadhu thittiduviya-nu oru chinna bayam. Adhanaala appove unkitta pesaama irundhuten. Internship mudichittu nee pogumbodhu kooda, appove poi pesirukkalaame-nu yosichen, but bayam enna thaduthuduchii...</p>
+            <p>Appuram nee project-ku varumbodhu eppadiyaavadhu un number illa Instagram ID vaanganum-nu plan panni vachirundhen. <strong>Aana kadaisila neeye enkitta number ketta! 😂❤️</strong> Andha moment enakku evlo special-nu unakku theriyadhu.</p>
+        `
+    },
+    {
+        title: "⌚ Un Kannum... Nee Gift Panna Watch-um",
+        timer: 11,
+        content: `
+            <p>Unna pathi sollanumna, nee oru romba nalla person. Un smile, un voice, nee pesura vidham, nee sirikkura vidham, un kannu, un ovvoru chinna chinna actions ellame enakku romba pudikkum.</p>
+            <p>Unna paathu pesuradhukku enakku bayam illa. <strong>Aana un kannai paathu pesuradhukku mattum ennaala mudiyadhu. 🥹 Un kannula enna magic irukkunu theriyala. First time flat aanadhe andha kannukkuthaan. ❤️</strong></p>
+            <p>Nee enakku watch gift pannina andha moment kooda ennaala marakka mudiyadhu. Naan watch vaanganum-nu unkitta sollittu irundhen. Aana unna first time personal-ah meet pannumbodhu nee enakku watch gift pannuva-nu naan konjam kooda expect pannala.</p>
+            <p class="story-accent">Ippo kooda andha watch-la time paarkkumbodhellam mudhalla un face dhaan nyabagam varum. Adhu enakku verum watch illa. <strong>Nee enakku kodutha oru beautiful memory. Adha paarkkumbodhellam unna ninaikkaama irukka mudiyadhu. Thank you so much, my love! ❤️⌚</strong></p>
+        `
+    },
+    {
+        title: "💭 En Manasula Irukkura Unmai",
+        timer: 12,
+        content: `
+            <div class="story-subhighlight"><strong>Ippo oru mukkiyamaana vishayam unkitta open-ah sollanum.</strong></div>
+            <p>First-la nee enkitta pesuradhukku time theduva. Morning first message-ah nee dhaan anuppuva. Naan message panradhukku munnadiye nee Good Morning solliruppa. Andha chinna chinna moments enakku romba happiness-ah irundhuchu.</p>
+            <p>Aana indha last few weeks-ah namma communication konjam maariduchu. Especially unakku udambu sari illaama hospital pona appuram, enkitta pesa unakku time kidaikkiradhu romba kammiya irukku.</p>
+            <p>Un annan oorla irundhu vandhirukkaanga, avanga kooda irukkumbodhu adikkadi pesa mudiyadhu, appappo dhaan pesa mudiyum-nu nee sonna reason enakku puriyudhu; naan understand panikrean. Naan adha respect panren.</p>
+            <p>Aana sila nerangal-la nee message pannama irukkumbodhu, nee ennai avoid panriyo-nu enakku personal feel aagudhu. Nee appadi panra-nu naan sollala; nee apadi panna mateanu enaku therim. Un mela enakku nambikkai irukku unna mula namburean. <strong>Aana munna maadhiri nee enkitta pesuradha miss panren.</strong></p>
+            <p>Nee morning message pannuva-nu wait panradhu, un voice kekkanum-nu aasapaduradhu, un kooda konjam neram pesanum-nu ninaikkiradhu idhellam enakku ippo daily habit aagiduchu.</p>
+            <p>Unakku anga edhaavadhu problem irundhaalum enkitta open-ah sollu. Namma serndhu face pannalaam. Unna question panradhukkaagavo, unnai control panradhukkaagavo naan idhellam kekkala.</p>
+        `
+    },
+    {
+        title: "🕊️ Un Life-la Enakkum Konjam Space",
+        timer: 10,
+        content: `
+            <div class="story-highlight"><strong>Naan un kitta full-time attention kekkala. Un life-la enakkum konjam space irukkanum-nu dhaan aasapaduren.</strong></div>
+            <p>Unakku un family irukku, un responsibilities irukku, un personal time irukku. Adhellam enakku puriyum. Adhe maadhiri namma relationship-kum konjam time, care, communication irundha enakku romba happy-ah irukkum.</p>
+            <p>Nee busy-ah irundhaalum parava illa. Oru chinna message, oru call, oru voice note. Adhuve enakku podhum. Naan un kitta perusa edhuvum expect pannala.</p>
+            <p>Indha last few weeks-la naan neraya time azhudhuttu irukken. Adha unkitta oru time mattum dhaan sollirukken. Yen azhudhennu enakke theriyala. Aana un kitta sollanum-nu thonuchu. Adhaan solren.</p>
+            <p>Naan ipdi irukken-nu sonna, neeum appadiye irukkanum-nu naan sollala. Un feelings, un situation ellame enakku mukkiyam. Aana en manasula irukkuradha nee therinjikkanum-nu dhaan aasapaduren.</p>
+        `
+    },
+    {
+        title: "♾️ Wrinkles Vandhaalum Idhe Kadhal",
+        timer: 10,
+        content: `
+            <div class="story-subhighlight"><strong>Nee enakku oru girlfriend mattum illa. Nee enakku romba special-aana person. ❤️</strong></div>
+            <p>Innum oru personal vishayam sollanum. Physical attraction mattum dhaan love-nu ninaikkalaam. Aana enakku un mela irukkuradhu adhu illa.</p>
+            <p>Un kitta kidaikkura care, affection, understanding, support, un kooda pesuradhu, sirikkuradhu, chinna chinna sandaigal poduradhu, marubadiyum serndhu pesuradhu, un happiness-la naanum happy-ah irukkuradhu — idhellam dhaan enakku love.</p>
+            <p>Un beauty mattum illa, un character, un thoughts, un feelings, un happiness ellame love thann.</p>
+            <p class="story-accent"><strong>Naalaikku un face-la wrinkles vandhaalum, un appearance maarinaalum, un age aanaalum, nee eppadi irundhaalum naan unna idhe maadhiri love pannitte iruppen. Enakku venum-nu irukkuradhu un kooda oru beautiful life. ❤️</strong></p>
+        `
+    },
+    {
+        title: "🛡️ Un Safe Place-ah Naan Iruppen",
+        timer: 11,
+        content: `
+            <p>Unakku appa illainu nee sonnapo, unakku kidaikkaadha andha paasam, care, support ellathayum ennaala mudinja alavukku kodukkanum-nu ninaichen. <strong>Unakku oru safe place-ah irukkanum. Unnaala edhaiyum bayam illaama enkitta share panna mudiyanum.</strong></p>
+            <p>Unakku santhosham vandhaalum, kashtam vandhaalum, success vandhaalum, failure vandhaalum un pakkathula irukkanum. Un dreams-ku support pannanum. <strong>Unakku oru nalla partner-ah mattum illaama, unakku nalla appa-ahvum friend-ahvum irukkanum.</strong></p>
+            <p>Un mela enakku evvalavu nambikkai irukko, adhe maadhiri nee en mela nambikkai vaikka mudiyanum. Namma rendu perukkum edhaavadhu problem vandha silent-ah irundhu distance create pannama, open-ah pesi solve pannalaam.</p>
+            <p>Naan perfect person illa. En kitta-yum mistakes irukkum. Aana edhaavadhu thappu pannina adha accept panni correct pannikka ready-ah irukken. <strong>Namma relationship-la ego-vai vida love perusa irukkanum. ❤️</strong></p>
+        `
+    },
+    {
+        title: "🔥 ADHU NEE DHAAN, BIBA!",
+        timer: 11,
+        content: `
+            <p>Enakku unna lose panniduvom-ngira bayam irukku. Aana andha bayathula unna control panna virupam illa. Unna happy-ah paarkkanum, un kooda life long travel pannanum.</p>
+            <p>Namma future-la enna nadakkum-nu theriyadhu. Aana en heart-ku enna venum-nu enakku clear-ah theriyum...</p>
+            <div class="story-huge-text">ADHU NEE DHAAN, BIBA! ❤️‍🔥</div>
+            <p>Innaikum nee, naalaikum nee, en life full-ahum nee dhaan. Aayiram life kidaichaalum ovvoru life-layum unnai thedi, unnaiye choose pannuven.</p>
+            <p>Enakku unna love panradhukku oru reason thevai illa. Unna love panradhe enakku oru happiness. Nee enkooda irundha podhum-nu ninaikkiren. Aana adhe samayam un happiness, un dreams, un freedom ellathukkum naan support-ah irukkanum-nu aasapaduren.</p>
+            <p class="story-accent"><strong>Oru vishayam mattum promise panren:</strong> Endha situation vandhaalum unna purinjikka try pannuven. Unna vittu poganum-nu ninaikka maatten. Namma rendu perukkum evvalavu kashtam vandhaalum, adha serndhu face pannalaam. Unna oru naal kooda taken for granted-ah treat panna virumbala.</p>
+            <p>Nee enakku kidaicha beautiful gift. Un smile eppovume fade aaga koodadhu. Un dreams ellame fulfil aaganum. Nee healthy-ah, happy-ah irukkanum. Time-ku saapidu, nalla rest edu. <strong>Un health-ah first priority-ah paaru. ❤️</strong></p>
+        `
+    },
+    {
+        title: "🥺 I Miss You So Much Biba",
+        timer: 10,
+        content: `
+            <div class="story-subhighlight"><strong>I MISS YOU SO MUCH, BIBA! 🥺❤️</strong></div>
+            <p>Un kooda pesuradhu miss panren. Un voice miss panren. Un smile miss panren. Unna paarkkuradha miss panren. Un kooda spend panna ovvoru moment-um miss panren.</p>
+            <p>Nee enna miss panriyaanu enakku theriyala. Aana naan unna ovvoru naalum miss pannitte irukken.</p>
+            <p>Unakku naan evlo special-nu theriyanum. Adhe maadhiri nee enakku evlo special-nu naan unakku sollanum-nu thonuchu.</p>
+            <p>Naan un kitta kekkuradhu romba simple. Namma rendu perum namma feelings-ah open-ah share pannikanum. Konjam time spend pannanum. Love-ah mattum illa, friendship-ahvum namma relationship-ah maintain pannanum.</p>
+            <div class="story-highlight"><strong>I DON'T WANT A PERFECT RELATIONSHIP. I JUST WANT US TO UNDERSTAND EACH OTHER, TRUST EACH OTHER, AND NEVER GIVE UP ON EACH OTHER. ❤️</strong></div>
+        `
+    },
+    {
+        title: "👑 My World, My Queen, Forever Love",
+        timer: 10,
+        content: `
+            <p>Nee enakku:</p>
+            <div class="story-tags-grid">
+                <span>My Love ❤️</span>
+                <span>My Soul 🫀</span>
+                <span>My Happiness 🥹</span>
+                <span>My Queen 👑</span>
+                <span>My World 🌍</span>
+                <span>My Favourite Person 🫶</span>
+                <span>My Future ❤️</span>
+                <span>My Forever Love ♾️</span>
+            </div>
+            <div class="story-affirmations">
+                <strong>I ALWAYS MISS YOU. 💜</strong><br>
+                <strong>I ALWAYS TRUST YOU. 🔒</strong><br>
+                <strong>I WILL ALWAYS CHOOSE YOU. 💍</strong><br>
+                <strong>I WILL ALWAYS LOVE YOU SOOOOO MUCH, MY BIBA! 🥹❤️</strong>
+            </div>
+            <p>Un kooda innum neraya memories create pannanum. Un ovvoru birthday-vum celebrate pannanum. Un happiness-la naanum irukkanum. Un success-ah un kooda serndhu celebrate pannanum. Life-la evvalavu changes vandhaalum namma rendu perum orutharukku oruthar support-ah irukkanum.</p>
+            <p>Last-ah onnu sollanum...</p>
+            <div class="story-highlight"><strong>Nee en life-la vandhadhu coincidence-ah irukkalaam. Aana unna love panradhu en manasu edutha beautiful decision.</strong></div>
+            <p>Unna naan evvalavu love panrennu ennaala words-la solla mudiyadhu. Aana ovvoru naalum unakku adha feel panna vaikka aasapaduren.</p>
+            <div class="story-subhighlight"><strong>YOU ARE MY FAVOURITE PERSON, MY BEAUTIFUL GIFT AND MY FOREVER LOVE! 🥹❤️♾️</strong></div>
+            <p style="font-size: 1.25em; text-align: center; margin-top: 15px;"><strong>I LOVE YOU SO MUCH, MY BIBA! 🫂💋❤️<br>UMMAAAAAAAAA! 😘💋❤️</strong></p>
+        `
+    }
+];
+
+let currentStoryIdx = 0;
+let highestStoryUnlocked = 0;
+let storyTimerInterval = null;
+let storyTimeRemaining = 0;
+let storyIsLocked = true;
+let storyCompleted = false;
+
+function startStoryReader() {
+    if (!storyCompleted) {
+        showStoryCard(currentStoryIdx);
+    }
+}
+
+if (document.readyState === "complete" || document.readyState === "interactive") {
+    const photoScreen = document.getElementById("photoScreen");
+    if(photoScreen && photoScreen.classList.contains("active")) {
+        startStoryReader();
+    }
+}
+
+function showStoryCard(idx) {
+    if (idx < 0 || idx >= storyChapters.length) return;
+    currentStoryIdx = idx;
+
+    const chapter = storyChapters[idx];
+    const cardEl = document.getElementById("storyActiveCard");
+    const chapterBadge = document.getElementById("storyChapterBadge");
+    const percentBadge = document.getElementById("storyPercentBadge");
+    const progressBar = document.getElementById("storyProgressBar");
+    const prevBtn = document.getElementById("storyPrevBtn");
+    const nextBtn = document.getElementById("storyNextBtn");
+    const btnText = document.getElementById("storyBtnText");
+    const spinner = document.getElementById("storyTimerSpinner");
+    const warning = document.getElementById("storyEarlyWarning");
+
+    if (warning) warning.classList.add("hidden");
+
+    // Progress updates
+    const percent = Math.round(((idx + 1) / storyChapters.length) * 100);
+    if (chapterBadge) chapterBadge.innerText = `💌 Chapter ${idx + 1} of ${storyChapters.length}`;
+    if (percentBadge) percentBadge.innerText = `${percent}% Read`;
+    if (progressBar) progressBar.style.width = `${percent}%`;
+
+    // Back button state
+    if (prevBtn) prevBtn.disabled = (idx === 0);
+
+    // Render content with smooth fade animation
+    if (cardEl) {
+        cardEl.style.animation = 'none';
+        void cardEl.offsetWidth; // trigger reflow
+        cardEl.style.animation = 'cardEntrance 0.5s ease-out forwards';
+        cardEl.innerHTML = `
+            <div class="story-card-title">${chapter.title}</div>
+            <div class="story-card-body">${chapter.content}</div>
+        `;
+    }
+
+    // Scroll container smoothly to top of card so it's easily readable
+    const scrollContainer = document.querySelector(".photo-scroll-container");
+    if (scrollContainer) {
+        scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Check if this card was already read/unlocked
+    if (idx < highestStoryUnlocked) {
+        // Already read previously! No waiting needed.
+        if (storyTimerInterval) clearInterval(storyTimerInterval);
+        storyIsLocked = false;
+        if (nextBtn) {
+            nextBtn.classList.remove("locked");
+            nextBtn.classList.add("ready-pulse");
+        }
+        if (spinner) spinner.style.display = "none";
+        if (btnText) {
+            btnText.innerText = (idx === storyChapters.length - 1) ? "Finish Reading 🥹❤️" : `Next Thought 💌 (${idx + 2}/${storyChapters.length})`;
+        }
+        return;
+    }
+
+    // Newly visited card: start reading timer!
+    if (storyTimerInterval) clearInterval(storyTimerInterval);
+    storyIsLocked = true;
+    storyTimeRemaining = chapter.timer;
+
+    if (nextBtn) {
+        nextBtn.classList.add("locked");
+        nextBtn.classList.remove("ready-pulse");
+    }
+    if (spinner) spinner.style.display = "inline-block";
+    if (btnText) btnText.innerText = `Porumaiya padunga... (${storyTimeRemaining}s 💜)`;
+
+    storyTimerInterval = setInterval(() => {
+        storyTimeRemaining--;
+        if (storyTimeRemaining > 0) {
+            if (btnText) btnText.innerText = `Porumaiya padunga... (${storyTimeRemaining}s 💜)`;
+        } else {
+            // Timer finished!
+            clearInterval(storyTimerInterval);
+            storyIsLocked = false;
+            highestStoryUnlocked = Math.max(highestStoryUnlocked, idx + 1);
+
+            if (nextBtn) {
+                nextBtn.classList.remove("locked");
+                nextBtn.classList.add("ready-pulse");
+            }
+            if (spinner) spinner.style.display = "none";
+            if (btnText) {
+                if (idx === storyChapters.length - 1) {
+                    btnText.innerText = "Finish Reading 🥹❤️";
+                } else {
+                    btnText.innerText = `Next Thought 💌 (${idx + 2}/${storyChapters.length})`;
+                }
+            }
+        }
+    }, 1000);
+}
+
+function handleStoryNextClick() {
+    if (storyIsLocked) {
+        // Shake button and show friendly warning
+        const nextBtn = document.getElementById("storyNextBtn");
+        const warning = document.getElementById("storyEarlyWarning");
+        if (nextBtn) {
+            nextBtn.classList.remove("shake-btn");
+            void nextBtn.offsetWidth;
+            nextBtn.classList.add("shake-btn");
+        }
+        if (warning) {
+            warning.classList.remove("hidden");
+            warning.classList.remove("pulse-toast");
+            void warning.offsetWidth;
+            warning.classList.add("pulse-toast");
+        }
+        return;
+    }
+
+    if (currentStoryIdx < storyChapters.length - 1) {
+        showStoryCard(currentStoryIdx + 1);
+    } else {
+        // Finished all chapters! Show final confirmation section
+        const finalSection = document.getElementById("storyFinalSection");
+        const actions = document.querySelector(".story-actions");
+        if (finalSection) {
+            finalSection.classList.remove("hidden");
+            finalSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        if (actions) actions.style.display = "none";
+    }
+}
+
+function prevStoryCard() {
+    if (currentStoryIdx > 0) {
+        showStoryCard(currentStoryIdx - 1);
+    }
+}
+
+function confirmStoryCompleted() {
+    createHeartBlast();
+    storyCompleted = true;
+    const confirmBtn = document.getElementById("storyConfirmBtn");
+    const unlockArea = document.getElementById("dreamsUnlockArea");
+    if (confirmBtn) {
+        confirmBtn.disabled = true;
+        confirmBtn.innerHTML = "Padichiten... I Love You So Much Logu! 🥹❤️";
+        confirmBtn.classList.add("confirmed");
+    }
+    if (unlockArea) {
+        unlockArea.classList.remove("hidden");
+        unlockArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function toggleFullLetterView() {
+    const fullContainer = document.getElementById("fullLetterContainer");
+    if (!fullContainer) return;
+    if (fullContainer.classList.contains("hidden")) {
+        fullContainer.classList.remove("hidden");
+        if (!fullContainer.innerHTML.trim()) {
+            fullContainer.innerHTML = storyChapters.map((c, i) => `
+                <div class="full-letter-chapter">
+                    <h4>${c.title}</h4>
+                    <div>${c.content}</div>
+                </div>
+            `).join("<hr class='story-divider'>");
+        }
+        fullContainer.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        fullContainer.classList.add("hidden");
+    }
 }
 
 /* =========================

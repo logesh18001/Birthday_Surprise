@@ -29,6 +29,10 @@ touch-action: manipulation;
 user-select: none;
 }
 
+.hidden {
+display: none !important;
+}
+
 /* SCENES */
 
 .scene{
@@ -958,6 +962,496 @@ bottom:120px;
     word-break: break-word;
     color: #fdf2f8;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================================
+   STORY READER (PAGE-BY-PAGE ROMANTIC UNLOCK)
+============================================================ */
+
+.story-wrapper {
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Progress Tracker */
+.story-progress-box {
+    width: 100%;
+    max-width: 680px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+}
+
+.story-progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.story-badge {
+    color: #e9d5ff;
+    letter-spacing: 0.5px;
+}
+
+.story-percent {
+    color: #f472b6;
+    background: rgba(244, 114, 182, 0.2);
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.story-progress-track {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.story-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #ec4899, #a855f7, #ffd700);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+/* Card Container */
+.story-card-container {
+    width: 100%;
+    max-width: 720px;
+    min-height: 240px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.story-card {
+    width: 100%;
+    text-align: left;
+    background: rgba(20, 10, 35, 0.72);
+    border: 1px solid rgba(216, 180, 254, 0.35);
+    border-radius: 22px;
+    padding: 26px 24px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(168, 85, 247, 0.12);
+    color: #fdf2f8;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@keyframes cardEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.story-card-title {
+    font-size: clamp(17px, 3.5vw, 22px);
+    font-weight: 700;
+    color: #ffd700;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    letter-spacing: 0.3px;
+}
+
+.story-card-body {
+    font-size: clamp(14.5px, 2.5vw, 16.5px);
+    line-height: 1.85;
+    color: #fdf2f8;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.story-card-body p {
+    margin-bottom: 14px;
+}
+
+.story-card-body p:last-child {
+    margin-bottom: 0;
+}
+
+.story-card-body strong {
+    color: #fbcfe8;
+    font-weight: 600;
+}
+
+/* Card Special Highlight Styles */
+.story-highlight {
+    background: rgba(236, 72, 153, 0.2);
+    border-left: 4px solid #ec4899;
+    padding: 12px 14px;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 14px;
+    font-size: 1.05em;
+    color: #fff;
+}
+
+.story-subhighlight {
+    background: rgba(168, 85, 247, 0.2);
+    border-left: 4px solid #c084fc;
+    padding: 10px 14px;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 14px;
+    color: #f3e8ff;
+}
+
+.story-special-date {
+    background: rgba(255, 215, 0, 0.12);
+    border: 1px dashed rgba(255, 215, 0, 0.4);
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    color: #fef08a;
+    margin: 14px 0;
+}
+
+.story-special-date strong {
+    color: #ffd700 !important;
+    font-size: 1.1em;
+}
+
+.story-accent {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.story-huge-text {
+    font-size: clamp(20px, 4.5vw, 32px);
+    font-weight: 800;
+    text-align: center;
+    margin: 16px 0;
+    color: #f43f5e;
+    text-shadow: 0 0 20px rgba(244, 63, 94, 0.8), 0 0 40px rgba(236, 72, 153, 0.6);
+    letter-spacing: 1px;
+    animation: heartBeatText 1.8s infinite;
+}
+
+@keyframes heartBeatText {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.story-tags-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.story-tags-grid span {
+    background: rgba(192, 132, 252, 0.22);
+    border: 1px solid rgba(192, 132, 252, 0.4);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    color: #fdf4ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.story-affirmations {
+    background: rgba(236, 72, 153, 0.18);
+    border: 1px solid rgba(236, 72, 153, 0.4);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    line-height: 2;
+    margin: 15px 0;
+    font-size: clamp(14px, 2.5vw, 16px);
+}
+
+.story-affirmations strong {
+    color: #fed7aa !important;
+}
+
+/* Shake Warning Toast */
+.story-warning-toast {
+    margin-top: 14px;
+    background: rgba(239, 68, 68, 0.25);
+    border: 1px solid rgba(239, 68, 68, 0.6);
+    color: #fecaca;
+    padding: 9px 18px;
+    border-radius: 25px;
+    font-size: 13.5px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.pulse-toast {
+    animation: pulseToast 0.5s ease-out;
+}
+
+@keyframes pulseToast {
+    0% { transform: scale(0.9); opacity: 0; }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Story Controls */
+.story-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.story-prev-btn {
+    padding: 14px 22px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #e9d5ff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 35px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.story-prev-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.22);
+    color: #fff;
+    transform: translateX(-3px);
+}
+
+.story-prev-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.story-next-btn {
+    flex: 1;
+    max-width: 380px;
+    padding: 16px 26px;
+    border: none;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    touch-action: manipulation;
+}
+
+.story-next-btn.locked {
+    background: rgba(50, 20, 70, 0.85);
+    color: #d8b4fe;
+    border: 1px solid rgba(192, 132, 252, 0.35);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    cursor: wait;
+}
+
+.story-next-btn.locked:hover {
+    background: rgba(65, 25, 90, 0.9);
+    border-color: rgba(236, 72, 153, 0.5);
+}
+
+.story-next-btn:not(.locked) {
+    background: linear-gradient(135deg, #ec4899, #8b5cf6, #f59e0b);
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(236, 72, 153, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.story-next-btn:not(.locked):hover {
+    transform: scale(1.04);
+    box-shadow: 0 14px 35px rgba(236, 72, 153, 0.8);
+}
+
+.ready-pulse {
+    animation: readyGlow 2s infinite ease-in-out;
+}
+
+@keyframes readyGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.5); }
+    50% { box-shadow: 0 0 35px rgba(236, 72, 153, 0.9), 0 0 15px rgba(255, 215, 0, 0.6); }
+}
+
+.shake-btn {
+    animation: shakeAnimation 0.4s ease-in-out;
+}
+
+@keyframes shakeAnimation {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+}
+
+.timer-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(216, 180, 254, 0.3);
+    border-top: 2px solid #ffd700;
+    border-radius: 50%;
+    animation: spinTimer 0.8s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spinTimer {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Final Confirmation Section */
+.story-final-section {
+    width: 100%;
+    max-width: 650px;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: cardEntrance 0.7s ease-out;
+}
+
+.story-seal-card {
+    background: rgba(30, 15, 50, 0.85);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: 24px;
+    padding: 30px 24px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.2);
+    width: 100%;
+    backdrop-filter: blur(12px);
+}
+
+.seal-emoji {
+    font-size: 40px;
+    margin-bottom: 10px;
+    animation: heartBeatText 2s infinite;
+}
+
+.story-seal-card h3 {
+    font-size: clamp(20px, 4.5vw, 26px);
+    color: #ffd700;
+    margin-bottom: 8px;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.story-seal-card p {
+    font-size: 15px;
+    color: #e9d5ff;
+    margin-bottom: 20px;
+}
+
+.story-confirm-btn {
+    padding: 16px 36px;
+    background: linear-gradient(135deg, #ec4899, #f43f5e);
+    color: #fff;
+    border: none;
+    border-radius: 35px;
+    font-size: 16.5px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(244, 63, 94, 0.5);
+    transition: all 0.3s ease;
+}
+
+.story-confirm-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(244, 63, 94, 0.7);
+}
+
+.story-confirm-btn.confirmed {
+    background: linear-gradient(135deg, #10b981, #059669);
+    cursor: default;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.dreams-unlock-area {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    animation: cardEntrance 0.8s ease-out;
+}
+
+.unlock-heart-badge {
+    background: rgba(255, 215, 0, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    padding: 8px 20px;
+    border-radius: 20px;
+    color: #fef08a;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.pulse-glow {
+    animation: readyGlow 2.5s infinite;
+}
+
+.toggle-full-letter-btn {
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.35);
+    color: #d8b4fe;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-full-letter-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.full-letter-container {
+    width: 100%;
+    max-width: 720px;
+    margin-top: 25px;
+    background: rgba(10, 5, 20, 0.85);
+    border: 1px solid rgba(216, 180, 254, 0.3);
+    border-radius: 20px;
+    padding: 24px;
+    text-align: left;
+    color: #fdf2f8;
+    line-height: 1.85;
+    animation: cardEntrance 0.5s ease-out;
+}
+
+.full-letter-chapter {
+    margin-bottom: 20px;
+}
+
+.full-letter-chapter h4 {
+    color: #ffd700;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+.story-divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin: 22px 0;
 }
 
 .next-btn {
@@ -2100,6 +2594,46 @@ html, body {
 #dada {
     font-size: clamp(13px, 3.8vw, 15px);
     line-height: 1.75;
+}
+
+.story-card {
+    padding: 20px 16px;
+    border-radius: 18px;
+}
+
+.story-card-title {
+    font-size: 17px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+}
+
+.story-card-body {
+    font-size: 14.5px;
+    line-height: 1.75;
+}
+
+.story-actions {
+    gap: 8px;
+}
+
+.story-prev-btn {
+    padding: 12px 16px;
+    font-size: 13.5px;
+}
+
+.story-next-btn {
+    padding: 14px 18px;
+    font-size: 14px;
+}
+
+.story-seal-card {
+    padding: 22px 16px;
+}
+
+.story-confirm-btn {
+    padding: 14px 22px;
+    font-size: 14.5px;
+    width: 100%;
 }
 
 .next-btn {
